@@ -1,0 +1,55 @@
+<% include partials/header %>
+
+    
+
+        
+        <% if(typeof data[0] !== 'undefined'){ %>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 m-4 p-4 border bg-light rounded">
+
+                <h4><i class="fas fa-list-ol"></i> List of Universities in <%= data[0]["country"] %></h4>
+                <ul class="list-group">
+                <% if(typeof page === 'undefined'){page=1} %>
+        
+                <%  for(i=(page-1)*10; i < page*10 && i <  data.length; i++){ %>
+                <li class="list-group-item"><strong><%=`${(i+1)}. ${data[i]["name"]}`%></strong></li> 
+                <% } %>
+                </ul>
+
+                <br>
+                <div class="d-flex justify-content-center">
+                <nav>
+                <ul class="pagination flex-wrap">
+                <li class="page-item"><a class="page-link" href="/results?page=1&search=<%= data[0]["country"] %>&name=<%= name %>">First</a></li>
+                    <%  for(i=1; i <= Math.ceil(data.length/10); i++){ %>
+                    <% if (i != page) { %>
+                    <li class="page-item"><a class="page-link" href="/results?page=<%= +i %>&search=<%= data[0]["country"] %>&name=<%= name %>"><%= i %></a></li>
+                    <% } else{ %>
+                    <li class="page-item"><a class="page-link"><%= i %></a></li>
+                    <% } %>
+                    <% } %>
+                    <li class="page-item"><a class="page-link" href="/results?page=<%= i -1 %>&search=<%= data[0]["country"] %>&name=<%= name %>">Last</a></li>
+                </ul>
+                </nav>
+                </div>
+                    <br>
+                    <br>
+                <a href="#" class="btn btn-secondary">Back to search</a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <% } else{%>
+            <h6 style="margin-top:20px;">Sorry! We have no data for this country.</h6>
+            <a href="#" class="btn btn-secondary">Back to search</a>
+            <% } %>
+
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        </body>
+        </html>
